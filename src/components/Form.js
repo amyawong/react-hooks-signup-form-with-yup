@@ -6,12 +6,12 @@ import * as yup from "yup";
 
 // yup is similar to Sequelize; purpose of this is for validation of input fields
 const schema = yup.object().shape({
-  firstName: yup.string().required(), // have to match name property passed into input otherwise it won't know what to identify
-  lastName: yup.string().required(),
-  email: yup.string().email().required(),
-  age: yup.number().positive().integer().required(),
+  firstName: yup.string().required("Please enter your first name"), // have to match name property passed into input otherwise it won't know what to identify
+  lastName: yup.string().required("Please enter your last name"), // if required() isn't passed in anything, then default error message is displayed
+  email: yup.string().email().required("Please enter your email"), // passing in a string into required() allows for a custom error message
+  age: yup.number().positive().integer().required("Please enter your birthday"),
   // birthday: yup.required(),
-  password: yup.string().min(5).max(15).required(),
+  password: yup.string().min(5).max(15).required("Please enter a password"),
   confirmPassword: yup.string().oneOf([yup.ref("password"), null]), // checks to see if password field matches confirmPassword
 });
 
